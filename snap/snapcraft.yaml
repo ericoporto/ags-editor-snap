@@ -1,9 +1,11 @@
-name: notepad-plus-plus
+name: ags-editor
 version: latest
 version-script: cat $SNAPCRAFT_STAGE/version
-summary: notepad-plus-plus is a free source code editor.
+summary: ags-editor is the IDE for creating and running videogames of adventure (aka "quest") genre.
 description: |
- Based on the powerful editing component Scintilla, notepad-plus-plus is written in C++ and uses pure Win32 API and STL which ensures a higher execution speed and smaller program size. By optimizing as many routines as possible without losing user friendliness, notepad-plus-plus is trying to reduce the world carbon dioxide emissions. When using less CPU power, the PC can throttle down and reduce power consumption, resulting in a greener environment.
+ Adventure Game Studio (AGS) - is the IDE and the engine meant for creating and running videogames of adventure (aka "quest") genre. 
+ It has potential, although limited, support for other genres as well. 
+ Originally created by Chris Jones back in 1999, AGS was opensourced in 2011 and since continued to be developed by contributors.
 
 confinement: strict
 grade: stable
@@ -12,9 +14,9 @@ architectures:
     run-on: [amd64, i386]
 
 apps:
-  notepad-plus-plus:
-    command: notepad-plus-plus
-    desktop: usr/share/applications/notepad-plus-plus.desktop
+  ags-editor:
+    command: ags-editor
+    desktop: usr/share/applications/ags-editor.desktop
     plugs: [ wayland, x11, opengl, home, desktop, desktop-legacy, network, hardware-observe, process-control, cups-control, removable-media ]
 
 parts:
@@ -61,17 +63,16 @@ parts:
       ws="opt/wine-stable"
       cp -r $ws/* $spi/ && rm -r $spi/opt $docs $mans $spi/share/wine/fonts
 
-  notepad-plus-plus:
+  ags-editor:
     plugin: nil
     source: ./scripts
     override-build: |
       snapcraftctl build
       set -ex
-      ver=$(wget https://notepad-plus-plus.org/download -q -S -O - 2>&1 | grep 'Version</t' | cut -c19-24 | sed 's| -||' | sed 's/ //g')
-      echo $ver > $SNAPCRAFT_STAGE/version
+      echo 3.4.1 > $SNAPCRAFT_STAGE/version
       ./dl_npp
     stage:
       - bin
       - usr
       - share
-    build-packages: [wget, icoutils, p7zip-full]
+    build-packages: [wget, icoutils, unzip]
