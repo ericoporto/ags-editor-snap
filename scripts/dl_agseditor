@@ -9,7 +9,7 @@
 # Date: Feb 11 2018
 #
 
-dlnpp () {
+dlagseditor () {
     wget http://www.adventuregamestudio.co.uk/releases/finals/AGS-3.4.1-P2/AGS-3.4.1-P2.zip &> /dev/null
     for fnts in andalemo.ttf arialbd.ttf arialbi.ttf ariali.ttf arial.ttf ariblk.ttf comicbd.ttf comic.ttf courbd.ttf courbi.ttf couri.ttf cour.ttf georgiab.ttf georgiai.ttf georgia.ttf georgiaz.ttf impact.ttf l_10646.ttf lucon.ttf micross.ttf symbol.ttf tahomabd.ttf tahoma.ttf timesbd.ttf timesbi.ttf timesi.ttf times.ttf trebucbd.ttf trebucbi.ttf trebucit.ttf trebuc.ttf verdanab.ttf verdanai.ttf verdana.ttf verdanaz.ttf webdings.ttf wingding.ttf
     do
@@ -18,7 +18,7 @@ dlnpp () {
     done
 }
 
-mknpp () {
+mkagseditor () {
     unzip "AGS-3.4.1-P2.zip" -x'!change.log' -x'!license.txt' -x'!readme.txt' -x'!updater' -o"usr/share/ags-editor" &> /dev/null
     mv usr/share/ags-editor/AGSEditor.exe usr/share/ags-editor/ags-editor.exe
     find "usr" -type d -execdir chmod 755 {} +
@@ -27,7 +27,7 @@ mknpp () {
 }
 
 mkdsk () {
-cat > notepad-plus-plus.desktop <<'EOF1'
+cat > ags-editor.desktop <<'EOF1'
 [Desktop Entry]
 Name=AGS-Editor
 GenericName=Adventure Game Studio
@@ -42,10 +42,9 @@ StartupWMClass=ags-editor.exe
 Categories=Utility;IDE
 MimeType=text/plain;text/css;text/html;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-java;text/x-makefile;text/x-python;text/x-sh;application/x-wine-extension-ini;
 EOF1
-sed -i -e 's|Version=|Version='"$ver"'|g' notepad-plus-plus.desktop
 }
 
-dlnpp
-mknpp
+dlagseditor
+mkagseditor
 mkdsk
-mv notepad-plus-plus bin && mv notepad-plus-plus.desktop usr/share/applications && cp -R -p {bin,usr,share} $SNAPCRAFT_PART_INSTALL
+mv ags-editor bin && mv ags-editor.desktop usr/share/applications && cp -R -p {bin,usr,share} $SNAPCRAFT_PART_INSTALL
