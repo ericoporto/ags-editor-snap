@@ -70,7 +70,7 @@ parts:
       snapcraftctl build
       set -ex
       echo 3.4.1 > $SNAPCRAFT_STAGE/version
-      ./dl_npp
+      ./dl_agseditor
     stage:
       - bin
       - usr
