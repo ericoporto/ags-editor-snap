@@ -7,3 +7,9 @@
 distributions.</p>
 
 **Still in development, not currently working.**
+
+How to give a try to build.
+
+    git clone git@github.com:ericoporto/ags-editor-snap.git
+    cd ags-editor-snap
+    snapcraft build
