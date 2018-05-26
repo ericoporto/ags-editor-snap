@@ -70,6 +70,7 @@ parts:
       snapcraftctl build
       set -ex
       echo 3.4.1 > $SNAPCRAFT_STAGE/version
+      ./install_dotnet40 "$spi"
       ./dl_agseditor
     stage:
       - bin

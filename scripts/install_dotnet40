@@ -1,5 +1,5 @@
 #!/bin/sh
-WINE_USER_ROOT=""
+WINE_USER_ROOT="$1"
 
 Wine_Download_Resource ()
 {
